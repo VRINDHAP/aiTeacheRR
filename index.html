@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Teacher - Futuristic Personal AI Classroom</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/landing.css">
+  <link rel="stylesheet" href="styles/classroom.css">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- PDF.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+</head>
+<body>
+
+  <!-- ==================== HEADER / NAVIGATION ==================== -->
+  <header class="nav-container">
+    <div class="logo" id="logo-brand">
+      <div class="logo-icon">
+        <i data-lucide="graduation-cap" style="width:18px; height:18px; color:#ffffff;"></i>
+      </div>
+      <span class="text-gradient-primary">AI TEACHER</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#how-it-works" class="nav-link">How It Works</a>
+      <a href="#about" class="nav-link">About</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn btn-secondary btn-icon" id="theme-toggle-btn" title="Toggle Light/Dark Mode" style="border-radius: 50%; width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; padding: 0;">
+        <i data-lucide="moon" style="width: 18px;"></i>
+      </button>
+      <button class="btn btn-secondary" id="nav-login-btn">Log In</button>
+      <button class="btn btn-primary" id="nav-start-btn">Get Started</button>
+    </div>
+  </header>
+
+  <!-- ==================== VIEW 1: LANDING PAGE ==================== -->
+  <main id="landing-view" class="view-section active">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span></span> Next-Gen AI Classroom
+        </div>
+        <h1 class="hero-title text-gradient-primary">
+          Meet Your Personal <br>
+          <span class="text-gradient-neon glow-glow">AI Teacher</span>
+        </h1>
+        <p class="hero-description text-muted">
+          Upload study materials, learn interactively, ask questions through voice or chat, and receive personalized explanations from an intelligent, responsive virtual teacher.
+        </p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" id="hero-start-btn">
+            Start Learning <i data-lucide="arrow-right" style="width:16px; height:16px;"></i>
+          </button>
+          <button class="btn btn-secondary" id="hero-demo-btn">
+            <i data-lucide="play" style="width:16px; height:16px; fill:currentColor;"></i> Watch Demo
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Visuals (Structured Offset Card Deck) -->
+      <div class="hero-visual">
+        <div class="card-stack">
+          <!-- Card 1 -->
+          <div class="hero-card hero-card-1">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+              <i data-lucide="check-circle" style="color:var(--accent-cyan); width:18px;"></i>
+              <h4 style="color: var(--text-main); font-size: 0.95rem;">PDF Analysis</h4>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">Scans pages & abstracts core themes instantly.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="hero-card hero-card-2">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+              <i data-lucide="mic" style="color:var(--accent-pink); width:18px;"></i>
+              <h4 style="color: var(--text-main); font-size: 0.95rem;">Voice Feedback</h4>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">Real-time speech synthesis & lip-sync.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="hero-card hero-card-3">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+              <i data-lucide="brain" style="color:var(--primary-hover); width:18px;"></i>
+              <h4 style="color: var(--text-main); font-size: 0.95rem;">Gemini LLM</h4>
+            </div>
+            <p style="font-size: 0.8rem; margin: 0; color: var(--text-muted);">Contextual doubt clearing & summary maps.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+      <div class="section-header">
+        <h4 class="section-subtitle">Core Capabilities</h4>
+        <h2 class="section-title">Designed for Fast Comprehension</h2>
+        <p class="section-desc text-muted">A premium startup experience integrating voice, parsing, and real-time animation for modern learners.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Card 1 -->
+        <div class="glass-panel glass-panel-glow feature-card">
+          <div class="feature-icon">
+            <i data-lucide="smile"></i>
+          </div>
+          <h3>Human-Like AI Teacher</h3>
+          <p class="text-muted">Interactive vector avatar with eye-tracking, breathing, blinking, and active teaching gestures.</p>
+        </div>
+        <!-- Card 2 -->
+        <div class="glass-panel glass-panel-glow feature-card">
+          <div class="feature-icon">
+            <i data-lucide="file-text"></i>
+          </div>
+          <h3>PDF-Based Learning</h3>
+          <p class="text-muted">Drag & drop your study documents. Elena reads and creates custom learning sessions for you.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="glass-panel glass-panel-glow feature-card">
+          <div class="feature-icon">
+            <i data-lucide="mic"></i>
+          </div>
+          <h3>Voice Interaction</h3>
+          <p class="text-muted">Speak naturally to clear your doubts. The teacher listens, processes, and answers back vocally.</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="glass-panel glass-panel-glow feature-card">
+          <div class="feature-icon">
+            <i data-lucide="message-square"></i>
+          </div>
+          <h3>Chat-Based Doubts</h3>
+          <p class="text-muted">Ask questions, request analogies, or seek references from the document. Quick response latency.</p>
+        </div>
+        <!-- Card 5 -->
+        <div class="glass-panel glass-panel-glow feature-card">
+          <div class="feature-icon">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <h3>Smart Summaries</h3>
+          <p class="text-muted">Elena condenses long reading materials into concise, high-impact review bullet points.</p>
+        </div>
+        <!-- Card 6 -->
+        <div class="glass-panel glass-panel-glow feature-card">
+          <div class="feature-icon">
+            <i data-lucide="compass"></i>
+          </div>
+          <h3>Personalized Quizzes</h3>
+          <p class="text-muted">Dynamic multiple choice questions generated directly from your document to verify learning.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works-section">
+      <div class="section-header">
+        <h4 class="section-subtitle">Simplified Flow</h4>
+        <h2 class="section-title">Step Into the AI Classroom</h2>
+      </div>
+
+      <div class="process-timeline">
+        <!-- Step 1 -->
+        <div class="process-step">
+          <div class="process-indicator">1</div>
+          <div class="process-step-content">
+            <h3>Sign Up or Authenticate</h3>
+            <p class="text-muted">Create a secure profile to organize your different course uploads.</p>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="process-step">
+          <div class="process-indicator">2</div>
+          <div class="process-step-content">
+            <h3>Upload Material</h3>
+            <p class="text-muted">Upload any lecture PDF, lecture transcripts, or textbook chapters.</p>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="process-step">
+          <div class="process-indicator">3</div>
+          <div class="process-step-content">
+            <h3>Meet Elena</h3>
+            <p class="text-muted">Enter the classroom dashboard, select topics, ask questions by voice, and learn interactively.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="features-section" style="border-top: 1px solid var(--glass-border); padding-top: 80px; margin-top: 40px;">
+      <div class="section-header">
+        <h4 class="section-subtitle">Our Vision</h4>
+        <h2 class="section-title">Reimagining Education with AI</h2>
+        <p class="section-desc text-muted">AI Teacher bridges the gap between passive video lecturing and interactive private tutoring, making premium personal education accessible worldwide.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center; margin-top: 60px;">
+        <div class="glass-panel" style="padding: 40px; border-radius: 16px;">
+          <h3 style="font-size: 1.5rem; margin-bottom: 16px; color: var(--accent-cyan);">The Mission</h3>
+          <p class="text-muted" style="line-height: 1.7; font-size: 0.95rem; margin: 0;">
+            Traditional e-learning yields low completion rates because reading documents or watching static videos lacks dialogue and positive reinforcement. AI Teacher addresses this by humanizing learning. 
+          </p>
+          <p class="text-muted" style="line-height: 1.7; font-size: 0.95rem; margin-top: 16px;">
+            By utilizing advanced vector avatars, custom binary PDF parses, and Google's multimodal Gemini architecture, we construct a responsive classroom where students sit across from a supportive virtual teacher.
+          </p>
+        </div>
+
+        <div class="glass-panel" style="padding: 40px; border-radius: 16px; border-color: rgba(118, 74, 241, 0.25);">
+          <h3 style="font-size: 1.5rem; margin-bottom: 16px; color: var(--primary-hover);">Core Philosophy</h3>
+          <ul style="display: flex; flex-direction: column; gap: 16px; padding: 0;">
+            <li style="display: flex; align-items: flex-start; gap: 12px; margin: 0;">
+              <i data-lucide="shield-check" style="color: var(--accent-cyan); width: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+              <div>
+                <strong style="color: var(--text-main); display: block;">100% Privacy Secure</strong>
+                <span class="text-muted" style="font-size: 0.85rem;">All documents and local speech syntheses run directly inside the sandbox of your browser.</span>
+              </div>
+            </li>
+            <li style="display: flex; align-items: flex-start; gap: 12px; margin: 0;">
+              <i data-lucide="award" style="color: var(--accent-pink); width: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+              <div>
+                <strong style="color: var(--text-main); display: block;">Conversational Reinforcement</strong>
+                <span class="text-muted" style="font-size: 0.85rem;">Elena bobs her head, nods, smiles, and uses verbal cues to praise students upon completing quizzes.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>AI TEACHER</h4>
+          <p class="text-muted">Empowering students worldwide with zero-barrier virtual classrooms and smart document learning.</p>
+        </div>
+        <div class="footer-column">
+          <h5>Platform</h5>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 AI Teacher Inc. All rights reserved.</span>
+        <span>Made with ❤️ for advanced learning</span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ==================== VIEW 2: UPLOAD CENTRE ==================== -->
+  <section id="upload-view" class="view-section">
+    <div class="upload-container">
+      <button class="btn btn-secondary" id="upload-back-btn" style="margin-bottom:24px;">
+        <i data-lucide="arrow-left" style="width:16px;"></i> Back to Home
+      </button>
+
+      <div class="glass-panel" style="padding:40px; border-radius:16px;">
+        <h2 style="font-size:2rem; margin-bottom:12px; text-align:center;">Upload Course Materials</h2>
+        <p style="text-align:center; margin-bottom:32px;" class="text-muted">Provide a textbook PDF or notes document. Elena will parse it to teach you dynamically.</p>
+        
+        <!-- Drag & Drop Zone -->
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">
+            <i data-lucide="upload-cloud" style="width:32px; height:32px;"></i>
+          </div>
+          <div>
+            <h4 style="font-size:1.1rem; color:#ffffff; margin-bottom:4px;">Drag & Drop files here</h4>
+            <p class="text-muted" style="font-size:0.85rem;">Supports PDF, TXT, or markdown files</p>
+          </div>
+          <button class="btn btn-secondary" style="font-size:0.85rem; padding:8px 16px;">Browse Files</button>
+          <input type="file" id="file-input" style="display:none;" accept=".pdf,.txt,.md">
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress-container" id="progress-container">
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+            <span id="progress-status">Reading document...</span>
+          </div>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+        </div>
+
+        <div class="divider">Or Try a Demo</div>
+
+        <button class="btn btn-primary" id="mock-upload-btn" style="width:100%; border-radius:12px; padding:14px;">
+          Start Classroom with Default Course <i data-lucide="sparkles" style="width:16px;"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== VIEW 3: CLASSROOM DASHBOARD ==================== -->
+  <section id="classroom-view" class="view-section">
+    <div class="classroom-layout">
+      <!-- Top Bar -->
+      <div class="classroom-header">
+        <!-- Left: Logo -->
+        <div class="header-left">
+          <div class="logo-icon" style="width: 28px; height: 28px; border-radius: 6px; box-shadow: 0 0 10px rgba(0, 242, 254, 0.2); display: flex; align-items: center; justify-content: center;">
+            <i data-lucide="graduation-cap" style="width:14px; height:14px; color:#ffffff;"></i>
+          </div>
+          <span class="text-gradient-primary" style="font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.03em;">AI TEACHER</span>
+        </div>
+
+        <!-- Center: Class details -->
+        <div class="header-center">
+          <div class="class-title text-gradient-primary" id="classroom-title" style="font-size: 1rem; font-weight: 700;">1. Introduction to AI</div>
+          <div class="file-pill" style="padding: 4px 8px; font-size: 0.75rem;">
+            <i data-lucide="file" style="width:11px; color:var(--accent-cyan);"></i>
+            <span id="file-pill-text">AI_Fundamentals.pdf</span>
+          </div>
+        </div>
+
+        <!-- Right: Actions & Exit -->
+        <div class="header-right classroom-actions">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="font-size:0.75rem; color:var(--text-muted);">Speed:</span>
+            <select id="voice-speed" class="form-control" style="width:65px; padding:2px 6px; border-radius:6px; font-size:0.75rem; background:rgba(255,255,255,0.05); height: 28px;">
+              <option value="0.8">0.8x</option>
+              <option value="1.0" selected>1.0x</option>
+              <option value="1.2">1.2x</option>
+              <option value="1.4">1.4x</option>
+            </select>
+          </div>
+          <button class="btn btn-secondary btn-icon" id="theme-toggle-classroom-btn" title="Toggle Light/Dark Mode" style="border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; padding: 0;">
+            <i data-lucide="moon" style="width: 14px;"></i>
+          </button>
+          <button class="btn btn-secondary btn-icon" id="settings-btn" title="AI Settings" style="border-radius: 50%; width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center;">
+            <i data-lucide="settings" style="width: 14px;"></i>
+          </button>
+          <button class="btn btn-secondary" id="classroom-exit-btn" title="Exit Classroom" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; height: 32px; border-color: rgba(255, 71, 87, 0.3); color: var(--accent-pink);">
+            <i data-lucide="log-out" style="width:12px;"></i> Exit
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Columns Grid -->
+      <div class="classroom-main">
+        <!-- LEFT PANEL: AI Teacher Avatar Area -->
+        <div class="teacher-panel">
+          <div class="panel-scroller" style="display:flex; flex-direction:column; gap:16px;">
+            <!-- Avatar Frame -->
+            <div class="avatar-container" id="avatar-viewport">
+              <div class="teacher-status">
+                <span class="badge badge-glow" style="background:rgba(12,9,38,0.8); border-color:#764af1;">Elena (AI)</span>
+              </div>
+              
+              <!-- Voice waves canvas mockup -->
+              <div class="audio-waves" id="audio-waves">
+                <div class="wave-bar wave-bar-1"></div>
+                <div class="wave-bar wave-bar-2"></div>
+                <div class="wave-bar wave-bar-3"></div>
+                <div class="wave-bar wave-bar-4"></div>
+                <div class="wave-bar wave-bar-5"></div>
+              </div>
+            </div>
+
+            <!-- Interactive Whiteboard -->
+            <div class="whiteboard">
+              <div class="whiteboard-header">
+                <span id="whiteboard-topic">Whiteboard</span>
+                <i data-lucide="edit-3" style="width:12px; color:var(--accent-cyan);"></i>
+              </div>
+              <div class="whiteboard-content" id="whiteboard-text">
+                TOPIC: AI Overview
+                - Simulating human intelligence
+                - Narrow AI vs General AI
+                - Core methods: rules vs data models
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER PANEL: PDF Viewer & Lesson Content -->
+        <div class="content-panel">
+          <!-- Tabs Navigation -->
+          <div class="content-tabs">
+            <button class="content-tab active" id="tab-lecture">Lecture Content</button>
+            <button class="content-tab" id="tab-notes">Chapter Notes</button>
+            <button class="content-tab" id="tab-quiz">Practice Quiz</button>
+          </div>
+
+          <!-- Tabs Body scroll area -->
+          <div class="panel-scroller" id="classroom-content-body" style="padding:32px;">
+            <!-- Rendered via JS -->
+          </div>
+
+          <!-- Classroom Lesson Control Center -->
+          <div style="padding:12px 24px; border-top:1px solid var(--glass-border); display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; background:rgba(6, 4, 16, 0.45); z-index: 5;">
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-secondary" id="classroom-prev-btn" title="Previous Topic" style="padding:6px 12px; font-size:0.78rem; height:32px;">
+                <i data-lucide="chevron-left" style="width:14px;"></i> Prev Topic
+              </button>
+              <button class="btn btn-secondary" id="classroom-next-btn" title="Next Topic" style="padding:6px 12px; font-size:0.78rem; height:32px;">
+                Next Topic <i data-lucide="chevron-right" style="width:14px;"></i>
+              </button>
+            </div>
+            
+            <div style="display:flex; gap:6px;">
+              <button class="btn btn-primary" id="classroom-start-btn" title="Start Lesson" style="padding:6px 12px; font-size:0.78rem; height:32px; background:linear-gradient(135deg, #2ed573 0%, #26af5f 100%); border:none; box-shadow:0 4px 10px rgba(46, 213, 115, 0.25); color: #ffffff;">
+                <i data-lucide="play" style="width:14px; fill:currentColor;"></i> Start Lesson
+              </button>
+              <button class="btn btn-secondary" id="classroom-pause-btn" title="Pause Lesson" style="padding:6px 12px; font-size:0.78rem; height:32px; display:none;">
+                <i data-lucide="pause" style="width:14px;"></i> Pause
+              </button>
+              <button class="btn btn-secondary" id="classroom-resume-btn" title="Resume Lesson" style="padding:6px 12px; font-size:0.78rem; height:32px; display:none; border-color: #2ed573; color: #2ed573;">
+                <i data-lucide="play-circle" style="width:14px;"></i> Resume
+              </button>
+              <button class="btn btn-secondary" id="classroom-stop-btn" title="Stop Lesson" style="padding:6px 12px; font-size:0.78rem; height:32px; border-color:rgba(255, 71, 87, 0.3); color:#ff4757;">
+                <i data-lucide="square" style="width:14px; fill:currentColor;"></i> Stop
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT PANEL: AI Chat system -->
+        <div class="chat-panel">
+          <div class="chat-history" id="chat-history">
+            <!-- Messages added dynamically -->
+          </div>
+
+          <!-- Chat suggestion prompts -->
+          <div class="chat-suggestions" id="chat-suggestions">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Text message input -->
+          <div class="chat-input-area">
+            <input type="text" class="chat-input-box" id="chat-input" placeholder="Ask Elena a question about this chapter...">
+            <button class="btn btn-primary btn-icon" id="chat-send-btn" style="width:42px; height:42px; border-radius:50%;">
+              <i data-lucide="send" style="width:16px;"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- FLOATING BOTTOM CENTER VOICE CONTROLS -->
+        <div class="floating-voice-indicator">
+          <!-- Voice Transcribe Bubble -->
+          <div class="transcription-pill" id="transcription-pill">
+            <i data-lucide="loader" style="width:12px; animation:spin-slow 2s linear infinite;" class="loader-pulse"></i>
+            <span id="transcription-text">Listening...</span>
+          </div>
+
+          <!-- Microphone Orb -->
+          <div class="mic-btn-container" id="mic-btn-container">
+            <div class="mic-pulse-ring"></div>
+            <button class="btn-mic" id="voice-mic-btn">
+              <i data-lucide="mic" style="width:24px; height:24px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MODAL: AUTHENTICATION ==================== -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-content glass-panel" style="padding:32px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+        <h3 style="font-size:1.5rem; color:#ffffff;">Authentication Center</h3>
+        <button class="btn btn-secondary btn-icon" id="auth-close" style="width:32px; height:32px;">
+          <i data-lucide="x" style="width:14px;"></i>
+        </button>
+      </div>
+
+      <div class="tabs-header">
+        <button class="tab-btn active" id="tab-login">Log In</button>
+        <button class="tab-btn" id="tab-signup">Sign Up</button>
+      </div>
+
+      <form>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-control" placeholder="student@aiteach.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button class="btn btn-primary" id="auth-submit" style="width:100%; border-radius:10px; padding:12px; margin-top:10px;">Log In</button>
+      </form>
+
+      <div class="divider">Or continue with</div>
+
+      <div class="social-login">
+        <button class="btn-social">
+          <i data-lucide="github" style="width:16px;"></i> Github
+        </button>
+        <button class="btn-social">
+          <i data-lucide="chrome" style="width:16px;"></i> Google
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: WATCH DEMO ==================== -->
+  <div class="modal-overlay" id="demo-modal">
+    <div class="modal-content glass-panel" style="max-width:700px; padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 style="font-size:1.4rem; color:#ffffff;">AI Classroom Experience Tour</h3>
+        <button class="btn btn-secondary btn-icon" id="demo-close" style="width:32px; height:32px;">
+          <i data-lucide="x" style="width:14px;"></i>
+        </button>
+      </div>
+      
+      <!-- Visual simulated educational demonstration -->
+      <div style="aspect-ratio:16/9; background:#08061a; border: 1px solid var(--glass-border); border-radius:12px; overflow:hidden; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 20px;">
+        <div style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0.1; background-image:radial-gradient(circle at 50% 50%, var(--primary) 0%, transparent 60%); z-index:1;"></div>
+        
+        <div style="z-index:2; text-align:center; max-width:480px;">
+          <div class="logo-icon" style="margin:0 auto 16px auto; width:48px; height:48px; border-radius:12px;">
+            <i data-lucide="play" style="width:24px; color:#ffffff; fill:#ffffff;"></i>
+          </div>
+          <h4 style="font-size:1.15rem; color:#ffffff; margin-bottom:10px;">Simulation: Elena explains Quantum Computing</h4>
+          <p class="text-muted" style="font-size:0.85rem; line-height:1.6; margin-bottom:16px;">
+            "Imagine a regular computer bit is like a standard light switch, which can only be on or off. A quantum qubit is like a spinning coin, existing in multiple positions at once."
+          </p>
+          <div style="display:inline-flex; align-items:center; gap:8px; font-size:0.75rem; color:var(--accent-cyan);">
+            <span style="width:8px; height:8px; background:var(--accent-cyan); border-radius:50%; box-shadow:0 0 8px var(--accent-cyan);"></span>
+            Elena is currently generating a visual representation...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: SETTINGS (API KEY) ==================== -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal-content glass-panel" style="padding:32px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+        <h3 style="font-size:1.4rem; color:#ffffff;">AI Teacher Configuration</h3>
+        <button class="btn btn-secondary btn-icon" id="settings-close" style="width:32px; height:32px;">
+          <i data-lucide="x" style="width:14px;"></i>
+        </button>
+      </div>
+
+      <div style="margin-bottom:20px;">
+        <p class="text-muted" style="font-size:0.85rem; line-height:1.5; margin-bottom:16px;">
+          Configure Elena's brain. Select your preferred LLM provider and paste your API key to connect her directly to live intelligent generation.
+        </p>
+        <div class="form-group">
+          <label class="form-label">LLM Provider</label>
+          <select id="llm-provider-select" class="form-control" style="background: rgba(0,0,0,0.25); color: #ffffff;">
+            <option value="gemini">Google Gemini</option>
+            <option value="openai">OpenAI ChatGPT</option>
+          </select>
+        </div>
+        <div class="form-group" id="gemini-key-group">
+          <label class="form-label">Gemini API Key</label>
+          <input type="password" class="form-control" id="api-key-input" placeholder="AIzaSy...">
+        </div>
+        <div class="form-group" id="openai-key-group" style="display:none;">
+          <label class="form-label">OpenAI API Key</label>
+          <input type="password" class="form-control" id="openai-key-input" placeholder="sk-proj-...">
+        </div>
+        <div style="margin-top: 12px; margin-bottom: 16px; display: flex; gap: 10px; align-items: center;">
+          <button class="btn btn-secondary" id="test-connection-btn" type="button" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; height: 32px; display: inline-flex; align-items: center; gap: 6px;">
+            <i data-lucide="activity" style="width: 14px;"></i> Test Connection
+          </button>
+          <span id="test-connection-status" style="font-size: 0.78rem; font-weight: 500;"></span>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-dim); display:flex; align-items:center; gap:6px;">
+          <i data-lucide="shield-check" style="color:var(--accent-cyan);"></i>
+          Your keys are saved locally in your browser and are never sent to external servers.
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="save-settings" style="width:100%; border-radius:10px; padding:12px;">
+        Save & Apply Configuration
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== CORE JAVASCRIPT MODULES ==================== -->
+  <script src="js/speech.js"></script>
+  <script src="js/pdf-handler.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/avatar.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>
