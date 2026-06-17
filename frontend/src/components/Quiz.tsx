@@ -214,7 +214,7 @@ export const Quiz: React.FC<QuizProps> = ({
               <div className="active-docs-badge">
                 Selected Materials ({selectedDocNames.length}): {selectedDocNames.join(', ')}
               </div>
-              <p style={{ fontSize: '0.75rem', color: var(--text-muted) }}>
+              <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 The quiz will be custom generated specifically from the texts of these files.
               </p>
             </div>
@@ -229,7 +229,7 @@ export const Quiz: React.FC<QuizProps> = ({
                 value={customTopic}
                 onChange={(e) => setCustomTopic(e.target.value)}
               />
-              <p style={{ fontSize: '0.75rem', color: var(--text-muted) }}>
+              <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 Type a custom topic or upload materials on the sidebar to quiz from documents.
               </p>
             </div>

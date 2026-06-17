@@ -7,8 +7,15 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from .env file (checks workspace directories dynamically)
+if os.path.exists('.env'):
+    load_dotenv('.env')
+elif os.path.exists('../frontend/.env'):
+    load_dotenv('../frontend/.env')
+elif os.path.exists('../.env'):
+    load_dotenv('../.env')
+else:
+    load_dotenv()
 
 # Import our services
 from services.doc_processor import process_file
@@ -182,10 +189,28 @@ def get_quiz():
     topic = data.get("topic", "")
     selected_doc_ids = data.get("selected_doc_ids", [])
     count = data.get("count", 5)
+    history = data.get("history", [])
     
     api_key = request.headers.get("X-Gemini-API-Key")
     
-    # Build text content reference
+    # 1. Build history context
+    history_context = ""
+    if history:
+        history_parts = []
+        for turn in history:
+            role = "Student" if turn.get("role") == "user" else "Teacher Avatar"
+            text_val = turn.get("text", "")
+            # Clean expression tags out of history context
+            text_clean = text_val.replace("[EXPRESSION: happy]", "").replace("[EXPRESSION: explaining]", "").replace("[EXPRESSION: thinking]", "").replace("[EXPRESSION: listening]", "").replace("[EXPRESSION: sad]", "").strip()
+            history_parts.append(f"{role}: {text_clean}")
+        history_context = (
+            "--- RECENT LESSON CHAT HISTORY (concepts learned so far) ---\n"
+            + "\n".join(history_parts)
+            + "\n----------------------------------------------------------\n\n"
+            + "Generate the quiz testing the concepts taught in the conversation above."
+        )
+    
+    # 2. Build study materials context reference
     quiz_context = ""
     if selected_doc_ids:
         metadata = load_metadata()
@@ -201,18 +226,29 @@ def get_quiz():
                         print(f"Error reading file: {e}")
         quiz_context = "\n\n".join(context_parts)
         
-    # If a topic was also provided, append it
-    if topic:
+    # Combine the context components
+    combined_context = ""
+    if history_context:
+        combined_context += history_context
         if quiz_context:
-            quiz_context = f"Topic to focus on: {topic}\n\nSource Materials:\n{quiz_context}"
+            combined_context += f"\n\nStudy Source Materials:\n{quiz_context}"
+        elif topic:
+            combined_context += f"\n\nTopic Focus: {topic}"
+    else:
+        # Standard fallback if no chat history
+        if topic:
+            if quiz_context:
+                combined_context = f"Topic to focus on: {topic}\n\nSource Materials:\n{quiz_context}"
+            else:
+                combined_context = topic
         else:
-            quiz_context = topic
+            combined_context = quiz_context
             
-    if not quiz_context:
-        return jsonify({"error": "Please provide a topic or select documents to generate a quiz."}), 400
+    if not combined_context:
+        return jsonify({"error": "Please provide a topic, select documents, or start learning to generate a quiz."}), 400
         
     try:
-        quiz_json = generate_quiz(api_key=api_key, topic_or_context=quiz_context, count=count)
+        quiz_json = generate_quiz(api_key=api_key, topic_or_context=combined_context, count=count)
         return jsonify(quiz_json)
     except Exception as e:
         print(f"Error in quiz generation: {e}")

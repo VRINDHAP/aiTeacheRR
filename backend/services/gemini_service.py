@@ -20,8 +20,8 @@ def generate_chat_response(api_key, prompt, history=None, context=None):
     """
     client = get_gemini_client(api_key)
     
-    # We will use gemini-1.5-flash as it is extremely fast and cost-effective
-    model_name = "gemini-1.5-flash"
+    # We will use gemini-2.5-flash as it is extremely fast and cost-effective
+    model_name = "gemini-2.5-flash"
     
     system_instruction = (
         "You are an encouraging, highly knowledgeable, and friendly AI Teacher Avatar. "
@@ -75,7 +75,7 @@ def generate_quiz(api_key, topic_or_context, count=5):
     """
     client = get_gemini_client(api_key)
     
-    model_name = "gemini-1.5-flash"
+    model_name = "gemini-2.5-flash"
     
     prompt = (
         f"Generate a multiple-choice quiz containing exactly {count} questions based on the following topic or source material:\n"

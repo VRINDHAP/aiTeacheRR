@@ -132,6 +132,7 @@ export const Chat: React.FC<ChatProps> = ({
           display: flex;
           flex-direction: column;
           height: 100%;
+          min-height: 0;
           border-radius: 16px;
           overflow: hidden;
           background: hsla(223, 35%, 11%, 0.4);
@@ -208,6 +209,7 @@ export const Chat: React.FC<ChatProps> = ({
         .chat-body {
           flex-grow: 1;
           overflow-y: auto;
+          min-height: 0;
           padding: 20px;
           display: flex;
           flex-direction: column;

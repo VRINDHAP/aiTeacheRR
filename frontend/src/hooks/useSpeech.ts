@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 export interface UseSpeechReturn {
   isSupported: boolean;
   isSpeaking: boolean;
+  isPaused: boolean;
   isListening: boolean;
   transcript: string;
   voices: SpeechSynthesisVoice[];
@@ -10,6 +11,8 @@ export interface UseSpeechReturn {
   setSelectedVoiceName: (name: string) => void;
   speak: (text: string, onBoundary?: (event: SpeechSynthesisEvent) => void) => void;
   stopSpeaking: () => void;
+  pauseSpeaking: () => void;
+  resumeSpeaking: () => void;
   startListening: (onResult: (text: string) => void, onEnd?: () => void) => void;
   stopListening: () => void;
 }
@@ -17,6 +20,7 @@ export interface UseSpeechReturn {
 export function useSpeech(): UseSpeechReturn {
   const [isSupported, setIsSupported] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -71,14 +75,44 @@ export function useSpeech(): UseSpeechReturn {
     }
   }, []);
 
+  const cleanTextForSpeech = (rawText: string) => {
+    let clean = rawText;
+
+    // 1. Remove expression tags like [EXPRESSION: happy]
+    clean = clean.replace(/\[EXPRESSION:\s*\w+\]/g, '');
+
+    // 2. Remove code blocks completely (sounds terrible if read out loud)
+    clean = clean.replace(/```[\s\S]*?```/g, ' [code snippet] ');
+
+    // 3. Remove inline backticks
+    clean = clean.replace(/`/g, '');
+
+    // 4. Remove headers, bullet symbols, blockquotes
+    clean = clean.replace(/^#+\s+/gm, ''); // Headings
+    clean = clean.replace(/^\s*[-*+]\s+/gm, ''); // Bullets
+    clean = clean.replace(/^\s*>\s+/gm, ''); // Blockquotes
+
+    // 5. Remove bold/italic markers
+    clean = clean.replace(/\*\*([^*]+)\*\*/g, '$1');
+    clean = clean.replace(/\*([^*]+)\*/g, '$1');
+    clean = clean.replace(/__([^_]+)__/g, '$1');
+    clean = clean.replace(/_([^_]+)_/g, '$1');
+
+    // 6. Clean up extra whitespaces/newlines
+    clean = clean.replace(/\n+/g, ' ');
+    clean = clean.replace(/\s+/g, ' ').trim();
+
+    return clean;
+  };
+
   const speak = (text: string, onBoundary?: (event: SpeechSynthesisEvent) => void) => {
     if (!synthRef.current || !isSupported) return;
 
     // Cancel any current speaking
     synthRef.current.cancel();
 
-    // Clean text: strip expression tags like [EXPRESSION: happy]
-    const cleanText = text.replace(/\[EXPRESSION:\s*\w+\]/g, '').trim();
+    // Clean text: strip out markdown symbols, tags and code blocks
+    const cleanText = cleanTextForSpeech(text);
     if (!cleanText) return;
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
@@ -90,11 +124,18 @@ export function useSpeech(): UseSpeechReturn {
       if (voice) utterance.voice = voice;
     }
 
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
+    utterance.onstart = () => {
+      setIsSpeaking(true);
+      setIsPaused(false);
+    };
+    utterance.onend = () => {
+      setIsSpeaking(false);
+      setIsPaused(false);
+    };
     utterance.onerror = (e) => {
       console.error('SpeechSynthesis error:', e);
       setIsSpeaking(false);
+      setIsPaused(false);
     };
 
     if (onBoundary) {
@@ -108,6 +149,21 @@ export function useSpeech(): UseSpeechReturn {
     if (synthRef.current) {
       synthRef.current.cancel();
       setIsSpeaking(false);
+      setIsPaused(false);
+    }
+  };
+
+  const pauseSpeaking = () => {
+    if (synthRef.current && synthRef.current.speaking && !synthRef.current.paused) {
+      synthRef.current.pause();
+      setIsPaused(true);
+    }
+  };
+
+  const resumeSpeaking = () => {
+    if (synthRef.current && synthRef.current.paused) {
+      synthRef.current.resume();
+      setIsPaused(false);
     }
   };
 
@@ -157,6 +213,7 @@ export function useSpeech(): UseSpeechReturn {
   return {
     isSupported,
     isSpeaking,
+    isPaused,
     isListening,
     transcript,
     voices,
@@ -164,6 +221,8 @@ export function useSpeech(): UseSpeechReturn {
     setSelectedVoiceName,
     speak,
     stopSpeaking,
+    pauseSpeaking,
+    resumeSpeaking,
     startListening,
     stopListening
   };

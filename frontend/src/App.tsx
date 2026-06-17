@@ -3,10 +3,10 @@ import { FiCpu, FiMessageSquare, FiTrendingUp, FiKey, FiLock, FiUnlock } from 'r
 
 // Components
 import { GlassCard } from './components/GlassCard';
-import { Avatar, AvatarState } from './components/Avatar';
-import { DocManager, DocumentData } from './components/DocManager';
-import { Chat, Message } from './components/Chat';
-import { Quiz, QuizData } from './components/Quiz';
+import { Avatar, type AvatarState } from './components/Avatar';
+import { DocManager, type DocumentData } from './components/DocManager';
+import { Chat, type Message } from './components/Chat';
+import { Quiz, type QuizData } from './components/Quiz';
 
 // Hooks
 import { useSpeech } from './hooks/useSpeech';
@@ -42,14 +42,14 @@ function App() {
 
   // Sync speech synthesis and speech recognition with Avatar states
   useEffect(() => {
-    if (speech.isSpeaking) {
+    if (speech.isSpeaking && !speech.isPaused) {
       setAvatarState('speaking');
     } else if (speech.isListening) {
       setAvatarState('listening');
     } else {
       setAvatarState('idle');
     }
-  }, [speech.isSpeaking, speech.isListening]);
+  }, [speech.isSpeaking, speech.isPaused, speech.isListening]);
 
   // Load documents on mount
   useEffect(() => {
@@ -236,7 +236,11 @@ function App() {
         body: JSON.stringify({
           topic,
           count,
-          selected_doc_ids: selectedDocIds
+          selected_doc_ids: selectedDocIds,
+          history: messages.map(m => ({
+            role: m.role,
+            text: m.text
+          }))
         })
       });
 
@@ -354,7 +358,10 @@ function App() {
           documents={documents}
           selectedDocIds={selectedDocIds}
           onToggleDocSelect={toggleDocSelect}
-          onUploadSuccess={fetchDocuments}
+          onUploadSuccess={(newDoc) => {
+            fetchDocuments();
+            setSelectedDocIds(prev => [...prev, newDoc.id]);
+          }}
           onDeleteSuccess={fetchDocuments}
           backendUrl={BACKEND_URL}
           apiKey={apiKey}
@@ -375,11 +382,47 @@ function App() {
               {avatarState === 'listening' && 'Say something! The avatar is listening via speech recognition.'}
               {avatarState === 'happy' && 'Terrific! Active interaction boosts learning retention.'}
             </p>
+            {speech.isSpeaking && !speech.isPaused && (
+              <button
+                onClick={() => {
+                  speech.pauseSpeaking();
+                  setAvatarState('idle');
+                }}
+                className="btn btn-secondary"
+                style={{ marginTop: '16px', padding: '8px 18px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 500 }}
+              >
+                Pause Explaining
+              </button>
+            )}
+            {speech.isPaused && (
+              <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '16px' }}>
+                <button
+                  onClick={() => {
+                    speech.resumeSpeaking();
+                    setAvatarState('speaking');
+                  }}
+                  className="btn btn-primary"
+                  style={{ padding: '8px 18px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 500 }}
+                >
+                  Resume
+                </button>
+                <button
+                  onClick={() => {
+                    speech.stopSpeaking();
+                    setAvatarState('idle');
+                  }}
+                  className="btn btn-danger"
+                  style={{ padding: '8px 18px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 500 }}
+                >
+                  Stop
+                </button>
+              </div>
+            )}
           </div>
         </GlassCard>
 
         {/* Right Side: Tab Panel (Chat or Quiz) */}
-        <div style={{ height: '100%' }}>
+        <div style={{ height: '100%', minWidth: 0, minHeight: 0 }}>
           {activeTab === 'chat' ? (
             <Chat
               messages={messages}

@@ -121,9 +121,7 @@ p {
 
 @keyframes speaking-mouth {
   0%, 100% { transform: scaleY(0.8) scaleX(1); }
-  25% { transform: scaleY(1.4) scaleX(0.95); }
-  50% { transform: scaleY(0.4) scaleX(1.1); }
-  75% { transform: scaleY(1.6) scaleX(0.9); }
+  50% { transform: scaleY(1.35) scaleX(0.97); }
 }
 
 @keyframes think-bubble {

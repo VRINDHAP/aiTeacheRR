@@ -14,7 +14,7 @@ interface DocManagerProps {
   documents: DocumentData[];
   selectedDocIds: string[];
   onToggleDocSelect: (docId: string) => void;
-  onUploadSuccess: () => void;
+  onUploadSuccess: (newDoc: DocumentData) => void;
   onDeleteSuccess: () => void;
   backendUrl: string;
   apiKey: string;
@@ -59,12 +59,12 @@ export const DocManager: React.FC<DocManagerProps> = ({
         body: formData
       });
 
+      const data = await response.json();
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to upload file');
+        throw new Error(data.error || 'Failed to upload file');
       }
 
-      onUploadSuccess();
+      onUploadSuccess(data.document);
     } catch (err: any) {
       setUploadError(err.message || 'Upload failed');
       console.error(err);

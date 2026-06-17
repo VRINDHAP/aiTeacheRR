@@ -116,14 +116,16 @@ export const Avatar: React.FC<AvatarProps> = ({ state }) => {
         }
 
         .mouth-speaking {
+          transform-origin: 90px 107px;
           animation: speaking-mouth 0.4s infinite ease-in-out;
         }
 
         .mouth-listening {
-          transform-origin: center;
+          transform-origin: 90px 107px;
         }
 
         .mouth-thinking {
+          transform-origin: 90px 107px;
           animation: mouth-think 1.5s infinite ease-in-out;
         }
 
