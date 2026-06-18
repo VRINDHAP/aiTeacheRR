@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiSend, FiMic, FiMicOff, FiVolume2, FiVolumeX, FiPlus, FiArrowDown } from 'react-icons/fi';
-import { GlassCard } from './GlassCard';
+import { FiSend, FiMic, FiMicOff, FiVolume2, FiVolumeX, FiArrowDown } from 'react-icons/fi';
+
 
 export interface Message {
   id: string;

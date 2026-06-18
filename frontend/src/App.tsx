@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FiCpu, FiMessageSquare, FiTrendingUp, FiKey, FiLock, FiUnlock } from 'react-icons/fi';
+import { FiCpu, FiMessageSquare, FiTrendingUp, FiLock} from 'react-icons/fi';
 
 // Components
 import { GlassCard } from './components/GlassCard';
@@ -266,7 +266,7 @@ function App() {
     <div className="app-container">
       {/* Header */}
       <header className="app-header">
-        <div style={{ display: 'flex', alignHover: 'center', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
             background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
             borderRadius: '10px',

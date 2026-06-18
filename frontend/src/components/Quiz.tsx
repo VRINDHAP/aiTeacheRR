@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiBookOpen, FiCheckCircle, FiXCircle, FiAward, FiArrowRight, FiRotateCcw } from 'react-icons/fi';
-import { GlassCard } from './GlassCard';
+
 
 export interface QuizQuestion {
   question_text: string;

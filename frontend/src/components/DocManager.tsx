@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { FiUploadCloud, FiFileText, FiTrash2, FiPlus, FiCheck } from 'react-icons/fi';
-import { GlassCard } from './GlassCard';
+import { FiUploadCloud, FiFileText, FiTrash2, FiCheck } from 'react-icons/fi';
+
 
 export interface DocumentData {
   id: string;
