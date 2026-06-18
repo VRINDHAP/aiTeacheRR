@@ -1,0 +1,179 @@
+Detailed Derivation of Posterior Mean and Variance
+(Expanded Completing-the-Square Steps)
+Bayesian Estimation
+1. Problem Setup
+Let:
+•x1, x2, . . . , x nbe independent observations
+•µbe an unknown mean
+•σ2be known variance
+Assume the likelihood:
+xi|µ∼ N(µ, σ2)
+Assume a Gaussian prior:
+µ∼ N(µ0, σ2
+0)
+Goal:
+Derive p(µ|x1, . . . , x n)
+2. Bayes’ Theorem
+Bayes’ theorem for parameter estimation is:
+p(µ|x) =p(x|µ)p(µ)
+p(x)
+Since p(x) does not depend on µ:
+p(µ|x)∝p(x|µ)p(µ)
+3. Likelihood Function
+Because observations are independent:
+p(x|µ) =nY
+i=11√
+2πσ2exp
+−(xi−µ)2
+2σ2
+1
+
+Ignoring constants:
+p(x|µ)∝exp 
+−1
+2σ2nX
+i=1(xi−µ)2!
+4. Prior Distribution
+The Gaussian prior is:
+p(µ) =1p
+2πσ2
+0exp
+−(µ−µ0)2
+2σ2
+0
+Ignoring constants:
+p(µ)∝exp
+−(µ−µ0)2
+2σ2
+0
+5. Forming the Posterior
+Multiplying likelihood and prior:
+p(µ|x)∝exp"
+−1
+2σ2nX
+i=1(xi−µ)2−(µ−µ0)2
+2σ2
+0#
+Taking logarithm:
+logp(µ|x) =−1
+2σ2nX
+i=1(xi−µ)2−(µ−µ0)2
+2σ2
+0+C
+6. Expanding the Quadratic Terms
+First expansion:
+nX
+i=1(xi−µ)2=nX
+i=1x2
+i−2µnX
+i=1xi+nµ2
+Second expansion:
+(µ−µ0)2=µ2−2µµ0+µ2
+0
+7. Substitution and Collection of Terms
+Substitute the expansions into the log-posterior:
+logp(µ|x) =−1
+2"
+µ2n
+σ2+1
+σ2
+0
+−2µPn
+i=1xi
+σ2+µ0
+σ2
+0#
++C
+This is a quadratic function of µ.
+8. Completing the Square (Expanded)
+Define:
+A=n
+σ2+1
+σ2
+0, B =Pn
+i=1xi
+σ2+µ0
+σ2
+0
+2
+
+Then:
+logp(µ|x) =−1
+2
+Aµ2−2Bµ
++C
+8.1 Factor Out A
+Aµ2−2Bµ=A
+µ2−2B
+Aµ
+8.2 Use the Identity
+Recall the identity:
+µ2−2aµ= (µ−a)2−a2
+Leta=B
+A:
+µ2−2B
+Aµ=
+µ−B
+A2
+−B
+A2
+8.3 Substitute Back
+Aµ2−2Bµ=A
+µ−B
+A2
+−B2
+A
+9. Final Gaussian Form
+Substitute into the log-posterior:
+logp(µ|x) =−1
+2"
+A
+µ−B
+A2
+−B2
+A#
++C
+Rearranging:
+=−A
+2
+µ−B
+A2
++B2
+2A+C
+|{z}
+constant
+Comparing with Gaussian form:
+−1
+2σ2
+N(µ−µN)2
+10. Identification of Posterior Parameters
+Posterior Variance
+1
+σ2
+N=A=n
+σ2+1
+σ2
+0
+σ2
+N=n
+σ2+1
+σ2
+0−1
+3
+
+Posterior Mean
+µN=B
+A=σ2
+NPn
+i=1xi
+σ2+µ0
+σ2
+0
+11. Final Posterior Distribution
+p(µ|x1, . . . , x n) =N(µN, σ2
+N)
+12. Key Insight
+The transition from Step 7 to Step 8 is achieved by completing the square, which rewrites the
+quadratic expression into Gaussian form, allowing direct identification of posterior mean and
+variance.
+4

@@ -11,7 +11,7 @@ import { Quiz, type QuizData } from './components/Quiz';
 // Hooks
 import { useSpeech } from './hooks/useSpeech';
 
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = 'https://aiteacherr.onrender.com';
 
 function App() {
   const [apiKey, setApiKey] = useState(() => localStorage.getItem('gemini_api_key') || '');
